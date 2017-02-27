@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM nginx:stable-alpine
 
 RUN apk add --no-cache certbot
 
@@ -6,4 +6,5 @@ VOLUME /etc/letsencrypt
 
 EXPOSE 80
 
-CMD /usr/bin/certbot certonly --standalone --verbose --noninteractive --quiet --standalone --agree-tos --email="developers@okode.com" -d "sonarqube.okode.com" --dry-run --preferred-challenges http-01 && tail -f /var/log/letsencrypt/letsencrypt.log
+CMD nginx && \
+    /usr/bin/certbot certonly --webroot --verbose --noninteractive --quiet  --agree-tos --email="developers@okode.com" --dry-run -w /usr/share/nginx/html -d "sonarqube.okode.com"
