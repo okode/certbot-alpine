@@ -6,6 +6,7 @@ VOLUME /etc/letsencrypt
 
 COPY crontab /var/spool/cron/crontabs/root
 COPY certbot.ash /usr/local/bin/
+COPY nginx.conf /etc/nginx/conf.d/default.conf 
 
 RUN chmod +x /usr/local/bin/certbot.ash
 RUN touch /var/log/container.log
