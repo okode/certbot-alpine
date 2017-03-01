@@ -16,3 +16,6 @@ else
         /usr/bin/certbot certonly --webroot --verbose --noninteractive --quiet  --agree-tos --email="${ADMIN_MAIL}" -w /usr/share/nginx/html -d "${DOMAINS}" >> $LOG_FILE 2>&1
     fi
 fi
+
+find $LETSENCRYPT_CERTDIR -type f -name 'privkey.pem' -exec cat {} + > $LETSENCRYPT_CERTDIR/combined.pem
+find $LETSENCRYPT_CERTDIR -type f -name 'fullchain.pem' -exec cat {} + >> $LETSENCRYPT_CERTDIR/combined.pem
